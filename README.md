@@ -293,5 +293,6 @@ This project can be explained using the following themes:
 ---
 
 ## Author
+Theebiha Jeyashankar
 
 Built as part of an AI QA / AI SDET portfolio project to demonstrate practical use of Playwright, AI integration, resilient test design, and CI/CD automation.
