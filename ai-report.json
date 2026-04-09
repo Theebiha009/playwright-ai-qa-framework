@@ -1,0 +1,230 @@
+{
+  "summary": "The automation healing events indicate a consistent failure in locating the password field using the original locator strategy, which was resolved by utilizing a cached locator strategy. All tests related to filling the password field on the LoginPage initially failed but were successfully healed using cached locators.",
+  "totalEvents": 20,
+  "successfulHeals": 20,
+  "failedHeals": 10,
+  "cacheHits": 10,
+  "fallbackUsed": 0,
+  "tests": [
+    {
+      "testName": "user can navigate to cart",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "original",
+      "status": "failed",
+      "details": "Original fill locator failed",
+      "healedLocator": null,
+      "timestamp": "2026-04-09T01:00:29.811Z"
+    },
+    {
+      "testName": "user can navigate to cart",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "cache",
+      "status": "success",
+      "details": "Used cached fill locator for LoginPage_password_fill",
+      "healedLocator": {
+        "locatorType": "placeholder",
+        "placeholder": "Password"
+      },
+      "timestamp": "2026-04-09T01:00:29.833Z"
+    },
+    {
+      "testName": "user can remove item from cart",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "original",
+      "status": "failed",
+      "details": "Original fill locator failed",
+      "healedLocator": null,
+      "timestamp": "2026-04-09T01:00:36.320Z"
+    },
+    {
+      "testName": "user can remove item from cart",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "cache",
+      "status": "success",
+      "details": "Used cached fill locator for LoginPage_password_fill",
+      "healedLocator": {
+        "locatorType": "placeholder",
+        "placeholder": "Password"
+      },
+      "timestamp": "2026-04-09T01:00:36.335Z"
+    },
+    {
+      "testName": "user can complete checkout successfully",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "original",
+      "status": "failed",
+      "details": "Original fill locator failed",
+      "healedLocator": null,
+      "timestamp": "2026-04-09T01:00:42.853Z"
+    },
+    {
+      "testName": "user can complete checkout successfully",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "cache",
+      "status": "success",
+      "details": "Used cached fill locator for LoginPage_password_fill",
+      "healedLocator": {
+        "locatorType": "placeholder",
+        "placeholder": "Password"
+      },
+      "timestamp": "2026-04-09T01:00:42.868Z"
+    },
+    {
+      "testName": "user can continue checkout after entering information",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "original",
+      "status": "failed",
+      "details": "Original fill locator failed",
+      "healedLocator": null,
+      "timestamp": "2026-04-09T01:00:49.342Z"
+    },
+    {
+      "testName": "user can continue checkout after entering information",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "cache",
+      "status": "success",
+      "details": "Used cached fill locator for LoginPage_password_fill",
+      "healedLocator": {
+        "locatorType": "placeholder",
+        "placeholder": "Password"
+      },
+      "timestamp": "2026-04-09T01:00:49.360Z"
+    },
+    {
+      "testName": "inventory page loads after valid login",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "original",
+      "status": "failed",
+      "details": "Original fill locator failed",
+      "healedLocator": null,
+      "timestamp": "2026-04-09T01:00:55.879Z"
+    },
+    {
+      "testName": "inventory page loads after valid login",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "cache",
+      "status": "success",
+      "details": "Used cached fill locator for LoginPage_password_fill",
+      "healedLocator": {
+        "locatorType": "placeholder",
+        "placeholder": "Password"
+      },
+      "timestamp": "2026-04-09T01:00:55.893Z"
+    },
+    {
+      "testName": "user can add first item to cart from inventory",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "original",
+      "status": "failed",
+      "details": "Original fill locator failed",
+      "healedLocator": null,
+      "timestamp": "2026-04-09T01:01:02.041Z"
+    },
+    {
+      "testName": "user can add first item to cart from inventory",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "cache",
+      "status": "success",
+      "details": "Used cached fill locator for LoginPage_password_fill",
+      "healedLocator": {
+        "locatorType": "placeholder",
+        "placeholder": "Password"
+      },
+      "timestamp": "2026-04-09T01:01:02.054Z"
+    },
+    {
+      "testName": "valid login",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "original",
+      "status": "failed",
+      "details": "Original fill locator failed",
+      "healedLocator": null,
+      "timestamp": "2026-04-09T01:01:08.219Z"
+    },
+    {
+      "testName": "valid login",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "cache",
+      "status": "success",
+      "details": "Used cached fill locator for LoginPage_password_fill",
+      "healedLocator": {
+        "locatorType": "placeholder",
+        "placeholder": "Password"
+      },
+      "timestamp": "2026-04-09T01:01:08.231Z"
+    },
+    {
+      "testName": "Invalid login",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "original",
+      "status": "failed",
+      "details": "Original fill locator failed",
+      "healedLocator": null,
+      "timestamp": "2026-04-09T01:01:14.351Z"
+    },
+    {
+      "testName": "Invalid login",
+      "page": "LoginPage",
+      "element": "password",
+      "action": "fill",
+      "originalLocator": "getByPlaceholder('Password123')",
+      "recoveryStrategy": "cache",
+      "status": "success",
+      "details": "Used cached fill locator for LoginPage_password_fill",
+      "healedLocator": {
+        "locatorType": "placeholder",
+        "placeholder": "Password"
+      },
+      "timestamp": "2026-04-09T01:01:14.376Z"
+    }
+  ],
+  "recommendations": [
+    "Investigate the reliability of the original locator strategy for the password field.",
+    "Consider updating the original locator to ensure it aligns with the current UI elements."
+  ]
+}

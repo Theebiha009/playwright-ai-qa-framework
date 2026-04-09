@@ -1,0 +1,19 @@
+{
+  "name": "playwright-ai-pom-framework",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:ai": "node utils/aiLocatorService.js",
+    "report:ai": "node utils/generateAiReport.js",
+    "clear:healing": "node utils/clearHealingLogs.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1",
+    "openai": "^4.104.0",
+    "playwright": "^1.44.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.59.1"
+  }
+}

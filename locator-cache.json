@@ -1,0 +1,6 @@
+{
+  "LoginPage_password_fill": {
+    "locatorType": "placeholder",
+    "placeholder": "Password"
+  }
+}
