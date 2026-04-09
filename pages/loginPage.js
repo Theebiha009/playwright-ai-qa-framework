@@ -8,7 +8,7 @@ export default class LoginPage extends BasePage {
     this.password = page.getByPlaceholder('Password123');
 
     // intentionally wrong to test AI
-    this.loginBtn = page.getByRole('button', { name: 'Login' });
+    this.loginBtn = page.getByRole('button', { name: 'Login123' });
   }
 
   async login(username, password, testName) {
