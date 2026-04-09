@@ -206,5 +206,157 @@
       "locatorType": "placeholder",
       "placeholder": "Password"
     }
+  },
+  {
+    "timestamp": "2026-04-09T06:16:27.423Z",
+    "testName": "SauceDemo Test",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "original",
+    "status": "failed",
+    "details": "Original fill locator failed"
+  },
+  {
+    "timestamp": "2026-04-09T06:16:27.442Z",
+    "testName": "SauceDemo Test",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-09T06:16:32.455Z",
+    "testName": "SauceDemo Test",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "original",
+    "status": "failed",
+    "details": "Original click locator failed"
+  },
+  {
+    "timestamp": "2026-04-09T06:16:39.945Z",
+    "testName": "SauceDemo Test",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "ai",
+    "status": "failed",
+    "details": "AI click locator failed for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "login-button",
+      "label": "",
+      "placeholder": "",
+      "text": "",
+      "selector": ""
+    }
+  },
+  {
+    "timestamp": "2026-04-09T06:16:40.206Z",
+    "testName": "SauceDemo Test",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "fallback",
+    "status": "success",
+    "details": "Used generic button fallback"
+  },
+  {
+    "timestamp": "2026-04-09T06:58:07.888Z",
+    "testName": "User can login and complete a purchase",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username')",
+    "strategy": "original",
+    "status": "failed",
+    "details": "Original fill locator failed"
+  },
+  {
+    "timestamp": "2026-04-09T06:58:14.666Z",
+    "testName": "User can login and complete a purchase",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username')",
+    "strategy": "ai",
+    "status": "failed",
+    "details": "AI fill locator failed for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "label",
+      "role": "",
+      "name": "",
+      "label": "Username",
+      "placeholder": "",
+      "text": "",
+      "selector": ""
+    }
+  },
+  {
+    "timestamp": "2026-04-09T06:58:14.691Z",
+    "testName": "User can login and complete a purchase",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username')",
+    "strategy": "fallback",
+    "status": "failed",
+    "details": "No fallback fill locator found"
+  },
+  {
+    "timestamp": "2026-04-09T06:58:24.526Z",
+    "testName": "User can login and complete a purchase",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username')",
+    "strategy": "original",
+    "status": "failed",
+    "details": "Original fill locator failed"
+  },
+  {
+    "timestamp": "2026-04-09T06:58:31.988Z",
+    "testName": "User can login and complete a purchase",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username')",
+    "strategy": "ai",
+    "status": "failed",
+    "details": "AI fill locator failed for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "label",
+      "role": "",
+      "name": "",
+      "label": "Username",
+      "placeholder": "",
+      "text": "",
+      "selector": ""
+    }
+  },
+  {
+    "timestamp": "2026-04-09T06:58:32.028Z",
+    "testName": "User can login and complete a purchase",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username')",
+    "strategy": "fallback",
+    "status": "failed",
+    "details": "No fallback fill locator found"
   }
 ]

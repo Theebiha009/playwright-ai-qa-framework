@@ -6,7 +6,8 @@
     "test": "npx playwright test",
     "test:ai": "node utils/aiLocatorService.js",
     "report:ai": "node utils/generateAiReport.js",
-    "clear:healing": "node utils/clearHealingLogs.js"
+    "clear:healing": "node utils/clearHealingLogs.js",
+    "generate:test": "node utils/generateTestFromRequirement.js"
   },
   "dependencies": {
     "dotenv": "^16.6.1",

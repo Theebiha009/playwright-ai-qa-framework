@@ -1,51 +1,126 @@
-# Playwright AI QA Framework
+# 🚀 Playwright AI QA Framework
 
-An enterprise-style Playwright automation framework built with JavaScript, Page Object Model (POM), AI-powered self-healing locators, locator caching, AI reporting, and GitHub Actions CI/CD integration.
-
-## Overview
-
-This framework was designed to demonstrate how modern QA automation can evolve beyond traditional locator-based scripts into a more resilient, intelligent, and maintainable testing solution.
-
-The project uses:
-
-- Playwright with JavaScript
-- Page Object Model (POM)
-- AI-powered locator healing using OpenAI
-- Locator caching for performance optimization
-- Healing event logging
-- AI-generated execution reports
-- GitHub Actions pipeline for CI execution and artifact publishing
-
-The framework is implemented using the SauceDemo application as the UI under test.
+An enterprise-style Playwright automation framework built with JavaScript, Page Object Model (POM), AI-assisted test generation, self-healing locators, intelligent caching, AI reporting, and CI/CD integration.
 
 ---
 
-## Key Features
+## 📌 Overview
 
-### 1. Page Object Model (POM)
-All pages are separated into reusable page classes for maintainability and scalability.
+This project demonstrates how modern QA automation can evolve using AI — not to replace engineers, but to **accelerate test creation, improve resilience, and reduce maintenance effort**.
 
-### 2. AI Self-Healing Locators
-If a locator fails, the framework tries to recover using AI by analyzing page metadata and suggesting a better Playwright locator.
+The framework combines:
 
-### 3. Locator Cache
-Once a locator is healed successfully, it is stored in a local cache file so the framework can reuse it in future executions without repeated AI calls.
+- Playwright (JavaScript)
+- Page Object Model (POM)
+- AI-assisted test generation
+- AI-powered locator healing
+- Locator caching
+- AI execution reporting
+- GitHub Actions CI/CD pipeline
 
-### 4. Fallback Strategy
-If original locator, cache, and AI healing all fail, the framework attempts a generic fallback strategy to keep test execution resilient.
+Application under test:
+👉 https://www.saucedemo.com
 
-### 5. AI Reporting
-Healing events are captured and summarized into an AI-powered report showing:
-- test name
-- page
-- element
-- action
-- strategy used
-- whether AI healing, cache, or fallback was used
+---
+
+## 🧠 Key Features
+
+### ✅ 1. Page Object Model (POM)
+Clean separation of UI logic into reusable page classes:
+- LoginPage
+- InventoryPage
+- CartPage
+- CheckoutPage
+
+---
+
+### 🤖 2. AI-Assisted Test Generation
+
+Converts natural-language requirements into **Playwright test scripts**.
+
+Example:
+
+**Input:**
+```
+User should login and complete checkout
+```
+
+**Output:**
+- Playwright `.spec.js` test file
+- Reuses existing page objects
+- Includes assertions
+
+⚠️ **Important (Real-World Behavior):**
+- AI generates a **draft test**
+- Human review is required for:
+  - locator accuracy
+  - framework conventions
+  - edge cases
+
+👉 This reflects real enterprise usage where AI acts as a **test accelerator, not a replacement**
+
+---
+
+### 🔁 3. AI Self-Healing Locators
+
+When a locator fails:
+
+1. Try original locator  
+2. Try cached locator  
+3. Try AI-generated locator  
+4. Use fallback strategy  
+
+This reduces flaky test failures and maintenance effort.
+
+---
+
+### ⚡ 4. Locator Cache
+
+- Stores successful healed locators in `locator-cache.json`
+- Avoids repeated AI calls
+- Improves performance
+
+---
+
+### 🛡️ 5. Fallback Strategy
+
+If all else fails, framework uses:
+- generic Playwright locators
+- role-based fallback
+- input-based fallback
+
+Ensures test resilience.
+
+---
+
+### 📊 6. AI Reporting
+
+After execution, framework generates:
+
+👉 `ai-report.json`
+
+Includes:
+- total healing events
+- successful AI heals
+- cache usage
+- fallback usage
+- detailed per-test logs
 - recommendations
 
-### 6. CI/CD Integration
-The framework runs through GitHub Actions and uploads:
+---
+
+### ⚙️ 7. CI/CD Integration (GitHub Actions)
+
+Pipeline automatically:
+
+- installs dependencies
+- installs Playwright browsers
+- clears healing logs
+- runs tests
+- generates AI report
+- uploads artifacts
+
+Artifacts include:
 - Playwright HTML report
 - test results
 - healing logs
@@ -54,36 +129,34 @@ The framework runs through GitHub Actions and uploads:
 
 ---
 
-## Framework Flow
+## 🔄 Framework Execution Flow
 
 ```text
 Test starts
    ↓
-Page Object method is called
+Page Object method called
    ↓
-BasePage tries original locator
+BasePage executes action
    ↓
-If original locator fails:
+If locator fails:
    → check cache
-   → if not found, try AI healing
-   → if AI fails, use generic fallback
+   → AI healing
+   → fallback strategy
    ↓
-Healing event is logged
+Event logged
    ↓
-Healed locator is cached
+Locator cached
    ↓
-AI report is generated after execution
+AI report generated
 ```
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```text
 playwright-ai-ui-framework/
-├─ .github/
-│  └─ workflows/
-│     └─ playwright-ai.yml
+├─ .github/workflows/playwright-ai.yml
 ├─ pages/
 │  ├─ basePage.js
 │  ├─ loginPage.js
@@ -94,95 +167,31 @@ playwright-ai-ui-framework/
 │  ├─ login.spec.js
 │  ├─ inventory.spec.js
 │  ├─ cart.spec.js
-│  └─ checkout.spec.js
+│  ├─ checkout.spec.js
+│  └─ generated/
 ├─ utils/
 │  ├─ aiLocatorService.js
 │  ├─ aiReportService.js
+│  ├─ aiTestGeneratorService.js
+│  ├─ generateTestFromRequirement.js
 │  ├─ locatorUtils.js
 │  ├─ locatorCache.js
 │  ├─ healingLogger.js
-│  ├─ clearHealingLogs.js
 │  └─ generateAiReport.js
+├─ prompts/
+│  └─ testGeneratorPrompt.js
 ├─ locator-cache.json
 ├─ healing-events.json
 ├─ ai-report.json
+├─ .env.example
 ├─ playwright.config.js
 ├─ package.json
-├─ .env.example
 └─ README.md
 ```
 
 ---
 
-## Technologies Used
-
-- JavaScript
-- Playwright
-- Node.js
-- OpenAI API
-- GitHub Actions
-- JSON-based caching and reporting
-
----
-
-## How AI Healing Works
-
-The framework follows a multi-layer recovery strategy:
-
-1. Try original locator
-2. Try cached healed locator
-3. Try AI-generated locator
-4. Try fallback strategy
-
-This makes the framework more resilient to UI changes and reduces maintenance effort.
-
----
-
-## Example Healing Scenario
-
-Suppose the login button locator is intentionally incorrect:
-
-```js
-this.loginBtn = page.getByRole('button', { name: 'Login123' });
-```
-
-When the test runs:
-
-- original locator fails
-- framework checks cache
-- if cache not available, AI analyzes page metadata
-- AI suggests a new locator like:
-
-```json
-{
-  "locatorType": "role",
-  "role": "button",
-  "name": "Login"
-}
-```
-
-- healed locator is used
-- healed locator is saved to cache
-- next run uses cache directly
-
----
-
-## AI Reporting
-
-After test execution, healing events are stored in `healing-events.json`.
-
-Then the framework generates `ai-report.json` containing:
-- execution summary
-- successful AI heals
-- failed AI heals
-- cache hits
-- fallback usage
-- detailed test-level healing events
-- recommendations
-
----
-
-## Running the Framework Locally
+## 🧪 Running the Framework
 
 ### Install dependencies
 
@@ -191,23 +200,39 @@ npm install
 npx playwright install
 ```
 
-### Run tests
+---
+
+### Run all tests
 
 ```bash
 npx playwright test
 ```
 
-### Run a single test file
+---
+
+### Run specific tests
 
 ```bash
 npx playwright test tests/login.spec.js
 ```
 
-### Clear healing logs
+---
+
+### Run generated tests
 
 ```bash
-npm run clear:healing
+npx playwright test tests/generated
 ```
+
+---
+
+### Generate AI test
+
+```bash
+npm run generate:test -- "User should login with valid credentials"
+```
+
+---
 
 ### Generate AI report
 
@@ -217,82 +242,79 @@ npm run report:ai
 
 ---
 
-## Environment Variables
+### Clear logs
 
-Create a local `.env` file:
+```bash
+npm run clear:healing
+```
+
+---
+
+## 🔐 Environment Setup
+
+Create `.env` locally:
 
 ```text
 OPENAI_API_KEY=your_openai_api_key_here
 ```
 
-Do not commit `.env`.
+Do NOT commit `.env`
 
-Use `.env.example` as the sample template.
-
----
-
-## GitHub Actions Pipeline
-
-The framework includes a GitHub Actions workflow that:
-
-- installs dependencies
-- installs Playwright browsers
-- clears healing logs
-- executes Playwright tests
-- generates AI report
-- uploads artifacts
-
-Artifacts include:
-- `playwright-report`
-- `test-results`
-- `healing-events.json`
-- `ai-report.json`
-- `locator-cache.json`
+Use `.env.example` as reference.
 
 ---
 
-## Why This Project Matters
+## 🧠 How AI is Used (Realistic View)
 
-Traditional UI automation frameworks often fail when locators change, causing frequent maintenance.
+This framework demonstrates **practical AI usage in QA**, not unrealistic automation.
 
-This framework demonstrates a more modern AI-assisted testing approach by combining:
+### AI is used for:
+- generating test drafts
+- suggesting locators
+- healing failures
+- reporting insights
 
-- resilient automation design
-- locator healing
-- self-learning cache
-- detailed execution visibility
-- CI/CD integration
+### Human involvement is still required for:
+- reviewing generated tests
+- validating locators
+- maintaining framework structure
 
-This project is intended to represent an AI SDET / AI QA Engineer style framework rather than a basic UI automation project.
-
----
-
-## Interview Talking Points
-
-This project can be explained using the following themes:
-
-- enterprise Playwright framework design
-- Page Object Model architecture
-- AI-assisted locator healing
-- cache-based optimization
-- fallback strategies for resiliency
-- AI-powered reporting
-- CI/CD execution and artifact publishing
+👉 This matches real-world enterprise QA practices.
 
 ---
 
-## Possible Future Enhancements
+## 💼 Why This Project Matters
 
-- AI-generated test case creation from user stories
-- RAG-based failure knowledge retrieval
-- AI chatbot for execution reports
-- dynamic locator confidence scoring
+Traditional automation:
+- brittle locators
+- high maintenance
+- slow test creation
+
+This framework improves by:
+- reducing locator failures
+- accelerating test creation
+- providing intelligent insights
+- integrating AI into QA workflows
+
+---
+
+## 🚀 Future Enhancements
+
+- AI multi-scenario test generation
+- RAG-based failure analysis
+- AI chatbot for test reports
 - database-backed locator cache
-- Slack or Teams notification integration
+- CI/CD insights dashboard
+- Slack/Teams notifications
 
 ---
 
-## Author
+## 👨‍💻 Author
 Theebiha Jeyashankar
+Built as part of an AI QA / AI SDET portfolio project to demonstrate:
 
-Built as part of an AI QA / AI SDET portfolio project to demonstrate practical use of Playwright, AI integration, resilient test design, and CI/CD automation.
+- Playwright automation
+- AI integration in testing
+- scalable framework design
+- CI/CD automation
+- real-world QA engineering practices
