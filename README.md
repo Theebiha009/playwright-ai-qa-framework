@@ -1,208 +1,182 @@
-# 🚀 Playwright AI QA Framework
+# 🚀 Playwright AI QA Automation Framework
 
-An enterprise-style Playwright automation framework built with JavaScript, Page Object Model (POM), AI-assisted test generation, self-healing locators, intelligent caching, AI reporting, and CI/CD integration.
+An advanced **AI-powered test automation framework** built using **Playwright (JavaScript)**, designed to simulate real-world QA challenges and solutions.
 
----
+This framework goes beyond traditional automation by introducing:
 
-## 📌 Overview
-
-This project demonstrates how modern QA automation can evolve using AI — not to replace engineers, but to **accelerate test creation, improve resilience, and reduce maintenance effort**.
-
-The framework combines:
-
-- Playwright (JavaScript)
-- Page Object Model (POM)
-- AI-assisted test generation
-- AI-powered locator healing
-- Locator caching
-- AI execution reporting
-- GitHub Actions CI/CD pipeline
-
-Application under test:
-👉 https://www.saucedemo.com
+* 🤖 AI-based locator healing
+* 🧠 RAG (Retrieval-Augmented Generation) memory
+* ⚡ Smart locator caching
+* 📊 AI-assisted reporting
+* 🧪 AI test generation (with human validation)
+* 🎯 AI-driven test prioritization (execution intelligence)
 
 ---
 
-## 🧠 Key Features
+# 📌 Key Features
 
-### ✅ 1. Page Object Model (POM)
-Clean separation of UI logic into reusable page classes:
-- LoginPage
-- InventoryPage
-- CartPage
-- CheckoutPage
+## 1. 🤖 AI Locator Healing
 
----
+Automatically fixes broken locators using AI when tests fail.
 
-### 🤖 2. AI-Assisted Test Generation
+**Flow:**
 
-Converts natural-language requirements into **Playwright test scripts**.
-
-Example:
-
-**Input:**
 ```
-User should login and complete checkout
+Original locator → Cache → RAG → AI → Fallback
 ```
 
-**Output:**
-- Playwright `.spec.js` test file
-- Reuses existing page objects
-- Includes assertions
-
-⚠️ **Important (Real-World Behavior):**
-- AI generates a **draft test**
-- Human review is required for:
-  - locator accuracy
-  - framework conventions
-  - edge cases
-
-👉 This reflects real enterprise usage where AI acts as a **test accelerator, not a replacement**
+Prevents test failures due to UI changes.
 
 ---
 
-### 🔁 3. AI Self-Healing Locators
+## 2. ⚡ Locator Cache
 
-When a locator fails:
+Stores previously healed locators for faster reuse.
 
-1. Try original locator  
-2. Try cached locator  
-3. Try AI-generated locator  
-4. Use fallback strategy  
-
-This reduces flaky test failures and maintenance effort.
+* Reduces repeated AI calls
+* Improves execution speed
 
 ---
 
-### ⚡ 4. Locator Cache
+## 3. 🧠 RAG Memory System
 
-- Stores successful healed locators in `locator-cache.json`
-- Avoids repeated AI calls
-- Improves performance
+Stores past healing decisions with embeddings.
 
----
-
-### 🛡️ 5. Fallback Strategy
-
-If all else fails, framework uses:
-- generic Playwright locators
-- role-based fallback
-- input-based fallback
-
-Ensures test resilience.
+* Finds similar failures
+* Reuses correct locators intelligently
+* Avoids repeated AI mistakes
 
 ---
 
-### 📊 6. AI Reporting
+## 4. 🧪 AI Test Generator
 
-After execution, framework generates:
+Generates Playwright test scripts from requirements.
 
-👉 `ai-report.json`
+⚠️ Designed for:
 
-Includes:
-- total healing events
-- successful AI heals
-- cache usage
-- fallback usage
-- detailed per-test logs
-- recommendations
+* accelerating test creation
+* not replacing human review
 
 ---
 
-### ⚙️ 7. CI/CD Integration (GitHub Actions)
+## 5. 📊 AI Healing Reports
 
-Pipeline automatically:
+Logs all healing activity:
 
-- installs dependencies
-- installs Playwright browsers
-- clears healing logs
-- runs tests
-- generates AI report
-- uploads artifacts
-
-Artifacts include:
-- Playwright HTML report
-- test results
-- healing logs
-- AI report
-- locator cache
+* which locators failed
+* how they were healed
+* which strategy worked (cache / RAG / AI / fallback)
 
 ---
 
-## 🔄 Framework Execution Flow
+## 6. 🎯 AI Test Prioritization (NEW 🔥)
 
-```text
-Test starts
-   ↓
-Page Object method called
-   ↓
-BasePage executes action
-   ↓
-If locator fails:
-   → check cache
-   → AI healing
-   → fallback strategy
-   ↓
-Event logged
-   ↓
-Locator cached
-   ↓
-AI report generated
+Optimizes test execution order based on:
+
+* failure history
+* recency of failures
+* success trends
+* business/module criticality
+
+### 💡 Why this matters
+
+Instead of running all tests blindly:
+
+> Run the most risky tests first → faster feedback → better CI efficiency
+
+---
+
+# 🧠 Test Prioritization Logic
+
+Each test gets a **priority score** based on:
+
+| Factor             | Impact              |
+| ------------------ | ------------------- |
+| Failure count      | High                |
+| Recent failures    | Very High           |
+| Success count      | Slight reduction    |
+| Module criticality | Business importance |
+
+---
+
+## 🏷️ Module Criticality
+
+```js
+login: 25
+checkout: 30
+cart: 15
+inventory: 10
+generated: 5
 ```
 
 ---
 
-## 📁 Project Structure
+## 📊 Example Priority Output
 
-```text
-playwright-ai-ui-framework/
-├─ .github/workflows/playwright-ai.yml
-├─ pages/
-│  ├─ basePage.js
-│  ├─ loginPage.js
-│  ├─ inventoryPage.js
-│  ├─ cartPage.js
-│  └─ checkoutPage.js
-├─ tests/
-│  ├─ login.spec.js
-│  ├─ inventory.spec.js
-│  ├─ cart.spec.js
-│  ├─ checkout.spec.js
-│  └─ generated/
-├─ utils/
-│  ├─ aiLocatorService.js
-│  ├─ aiReportService.js
-│  ├─ aiTestGeneratorService.js
-│  ├─ generateTestFromRequirement.js
-│  ├─ locatorUtils.js
-│  ├─ locatorCache.js
-│  ├─ healingLogger.js
-│  └─ generateAiReport.js
-├─ prompts/
-│  └─ testGeneratorPrompt.js
-├─ locator-cache.json
-├─ healing-events.json
-├─ ai-report.json
-├─ .env.example
-├─ playwright.config.js
-├─ package.json
-└─ README.md
+```json
+[
+  {
+    "testFile": "tests/checkout.spec.js",
+    "module": "checkout",
+    "priorityScore": 59
+  },
+  {
+    "testFile": "tests/login.spec.js",
+    "module": "login",
+    "priorityScore": 53
+  }
+]
 ```
 
 ---
 
-## 🧪 Running the Framework
+# 📁 Project Structure
 
-### Install dependencies
+```
+playwright-ai-qa-framework/
+│
+├── pages/                  # Page Object Models
+├── tests/                  # Test specs
+├── utils/                  # AI, logging, caching utilities
+├── rag/                    # RAG memory system
+├── prioritization/         # Test prioritization engine
+│   ├── testHistoryStore.js
+│   ├── testPrioritizer.js
+│   └── runPrioritizedTests.js
+│
+├── test-history.json       # Stores execution history
+├── test-priority-report.json
+├── locator-cache.json
+├── rag-memory.json
+│
+├── playwright.config.js
+├── package.json
+└── README.md
+```
+
+---
+
+# ⚙️ Setup
+
+## 1. Install dependencies
 
 ```bash
 npm install
-npx playwright install
 ```
 
 ---
 
-### Run all tests
+## 2. Add OpenAI API Key
+
+Create `.env`:
+
+```
+OPENAI_API_KEY=your_api_key_here
+```
+
+---
+
+## 3. Run tests
 
 ```bash
 npx playwright test
@@ -210,111 +184,121 @@ npx playwright test
 
 ---
 
-### Run specific tests
+# 🎯 Run AI Prioritized Tests
 
 ```bash
-npx playwright test tests/login.spec.js
+npm run prioritize:tests
 ```
 
 ---
 
-### Run generated tests
+# 📊 View Priority Report
 
 ```bash
-npx playwright test tests/generated
+npm run report:priority
 ```
 
 ---
 
-### Generate AI test
+# 🔄 How It Works (Execution Intelligence)
 
-```bash
-npm run generate:test -- "User should login with valid credentials"
+```
+Run tests
+   ↓
+Store results (test-history.json)
+   ↓
+Score tests based on:
+   - failures
+   - recency
+   - criticality
+   ↓
+Sort tests by risk
+   ↓
+Run highest priority tests first
 ```
 
 ---
 
-### Generate AI report
+# 🧠 AI Architecture
 
-```bash
-npm run report:ai
+## Runtime Intelligence
+
+* Locator healing (AI + RAG + cache)
+
+## Memory Intelligence
+
+* RAG system storing past healing decisions
+
+## Execution Intelligence
+
+* Test prioritization based on history
+
+---
+
+# 🧪 Example Use Case
+
+If:
+
+* Checkout tests fail recently
+* Login fails occasionally
+* Inventory always passes
+
+Then execution becomes:
+
+```
+1. checkout.spec.js
+2. login.spec.js
+3. cart.spec.js
+4. inventory.spec.js
 ```
 
 ---
 
-### Clear logs
+# ⚠️ Important Design Principles
 
-```bash
-npm run clear:healing
-```
-
----
-
-## 🔐 Environment Setup
-
-Create `.env` locally:
-
-```text
-OPENAI_API_KEY=your_openai_api_key_here
-```
-
-Do NOT commit `.env`
-
-Use `.env.example` as reference.
+* AI suggestions are **validated before use**
+* Cache and RAG store only **useful locators**
+* Framework avoids **over-reliance on AI**
+* Designed for **real-world maintainability**
 
 ---
 
-## 🧠 How AI is Used (Realistic View)
+# 🧠 What This Demonstrates
 
-This framework demonstrates **practical AI usage in QA**, not unrealistic automation.
+This framework shows:
 
-### AI is used for:
-- generating test drafts
-- suggesting locators
-- healing failures
-- reporting insights
-
-### Human involvement is still required for:
-- reviewing generated tests
-- validating locators
-- maintaining framework structure
-
-👉 This matches real-world enterprise QA practices.
+* Practical use of AI in QA automation
+* Intelligent failure recovery
+* Test execution optimization
+* Real-world automation architecture
 
 ---
 
-## 💼 Why This Project Matters
+# 📌 Future Enhancements
 
-Traditional automation:
-- brittle locators
-- high maintenance
-- slow test creation
+* AI explanation for prioritization decisions
+* Change-impact based prioritization (Git diff)
+* Flaky test detection
+* TypeScript migration
+* API + UI integrated testing
 
-This framework improves by:
-- reducing locator failures
-- accelerating test creation
-- providing intelligent insights
-- integrating AI into QA workflows
 
 ---
 
-## 🚀 Future Enhancements
-
-- AI multi-scenario test generation
-- RAG-based failure analysis
-- AI chatbot for test reports
-- database-backed locator cache
-- CI/CD insights dashboard
-- Slack/Teams notifications
-
----
-
-## 👨‍💻 Author
+# 👩‍💻 Author
 Theebiha Jeyashankar
-Built as part of an AI QA / AI SDET portfolio project to demonstrate:
+Built as part of an **AI SDET upskilling journey** focused on real-world automation challenges.
 
-- Playwright automation
-- AI integration in testing
-- scalable framework design
-- CI/CD automation
-- real-world QA engineering practices
+---
+
+# ⭐ Final Note
+
+This is not a “demo AI project”.
+
+It is a **practical framework** that reflects how AI can be applied meaningfully in QA:
+
+* reduce maintenance
+* improve reliability
+* optimize execution
+
+---

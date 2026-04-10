@@ -7,7 +7,10 @@
     "test:ai": "node utils/aiLocatorService.js",
     "report:ai": "node utils/generateAiReport.js",
     "clear:healing": "node utils/clearHealingLogs.js",
-    "generate:test": "node utils/generateTestFromRequirement.js"
+    "generate:test": "node utils/generateTestFromRequirement.js",
+    "prioritize:tests": "node prioritization/runPrioritizedTests.js",
+    "report:priority": "node -e \"import('./prioritization/testPrioritizer.js').then(m => console.log(JSON.stringify(m.getPrioritizedTests(), null, 2)))\""
+
   },
   "dependencies": {
     "dotenv": "^16.6.1",

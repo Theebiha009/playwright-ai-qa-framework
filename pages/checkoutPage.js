@@ -4,7 +4,7 @@ export default class CheckoutPage extends BasePage {
   constructor(page) {
     super(page);
 
-    this.firstName = page.getByPlaceholder('First Name');
+    this.firstName = page.getByPlaceholder('First Name1');//intentionally wrong password
     this.lastName = page.getByPlaceholder('Last Name');
     this.postalCode = page.getByPlaceholder('Zip/Postal Code');
     this.continueBtn = page.getByRole('button', { name: /^continue$/i });

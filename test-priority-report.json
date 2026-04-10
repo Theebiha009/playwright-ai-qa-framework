@@ -1,0 +1,42 @@
+[
+  {
+    "testFile": "tests/login.spec.js",
+    "module": "login",
+    "lastStatus": "failed",
+    "failureCount": 1,
+    "successCount": 1,
+    "lastRun": "2026-04-10T07:11:46.023Z",
+    "criticalityScore": 25,
+    "priorityScore": 54
+  },
+  {
+    "testFile": "tests/checkout.spec.js",
+    "module": "checkout",
+    "lastStatus": "passed",
+    "failureCount": 0,
+    "successCount": 2,
+    "lastRun": "2026-04-10T07:10:56.553Z",
+    "criticalityScore": 30,
+    "priorityScore": 28
+  },
+  {
+    "testFile": "tests/cart.spec.js",
+    "module": "cart",
+    "lastStatus": "passed",
+    "failureCount": 0,
+    "successCount": 2,
+    "lastRun": "2026-04-10T07:12:13.122Z",
+    "criticalityScore": 15,
+    "priorityScore": 13
+  },
+  {
+    "testFile": "tests/inventory.spec.js",
+    "module": "inventory",
+    "lastStatus": "passed",
+    "failureCount": 0,
+    "successCount": 2,
+    "lastRun": "2026-04-10T07:12:38.475Z",
+    "criticalityScore": 10,
+    "priorityScore": 8
+  }
+]

@@ -2,20 +2,46 @@ import OpenAI from 'openai';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+});
+
+function isValidHealedStep(step) {
+  if (!step || !step.locatorType) return false;
+
+  switch (step.locatorType) {
+    case 'role':
+      return !!step.role;
+    case 'label':
+      return !!step.label;
+    case 'placeholder':
+      return !!step.placeholder;
+    case 'text':
+      return !!step.text;
+    case 'css':
+      return !!step.selector;
+    default:
+      return false;
+  }
+}
 
 const aiLocatorService = {
-  async healLocator(locator, page) {
+  async healLocator(locator, page, actionType, elementName) {
     try {
-      if (page.isClosed()) return null;
+      if (page.isClosed()) {
+        console.log('⚠️ Page is already closed, skipping AI healing');
+        return null;
+      }
 
       const buttons = (
         await page.locator('button').evaluateAll(elements =>
           elements.map(el => ({
-            text: (el.textContent || '').trim(),
+            visibleText: (el.textContent || '').trim(),
             ariaLabel: el.getAttribute('aria-label') || '',
             id: el.getAttribute('id') || '',
-            name: el.getAttribute('name') || ''
+            name: el.getAttribute('name') || '',
+            dataTest: el.getAttribute('data-test') || ''
           }))
         )
       ).slice(0, 10);
@@ -36,7 +62,7 @@ const aiLocatorService = {
       const links = (
         await page.locator('a').evaluateAll(elements =>
           elements.map(el => ({
-            text: (el.textContent || '').trim(),
+            visibleText: (el.textContent || '').trim(),
             ariaLabel: el.getAttribute('aria-label') || '',
             href: el.getAttribute('href') || ''
           }))
@@ -48,6 +74,12 @@ You are a Playwright automation expert.
 
 A locator failed:
 ${locator.toString()}
+
+Action type:
+${actionType}
+
+Element name:
+${elementName}
 
 Available page elements:
 
@@ -68,13 +100,27 @@ Suggest the BEST Playwright locator using ONE of:
 - getByText
 - css
 
+IMPORTANT RULES:
+- If actionType is "click", prefer role/text/css for clickable elements
+- If actionType is "click", do NOT return placeholder for buttons like loginButton
+- If actionType is "fill", prefer placeholder/css for inputs
+- If elementName is "loginButton", prefer:
+  { "locatorType": "role", "role": "button", "name": "Login" }
+  or
+  { "locatorType": "text", "text": "Login" }
+- If elementName contains "password", prefer:
+  { "locatorType": "placeholder", "placeholder": "Password" }
+  or css for password input
+- If elementName contains "username", prefer:
+  { "locatorType": "placeholder", "placeholder": "Username" }
+- Do NOT return internal-looking names like "login-button" unless using css
+- Use css only as last option
+
 STRICT RULES:
 - Return ONLY valid JSON
 - No explanation
 - No markdown
 - No extra text
-- Prefer Playwright-native locators first
-- Use css only as last option
 
 FORMAT:
 {
@@ -94,7 +140,9 @@ FORMAT:
         temperature: 0
       });
 
-      const raw = response.choices[0].message.content || '';
+      const raw = response.choices[0]?.message?.content || '';
+      console.log('🧠 Raw AI locator response:', raw);
+
       const jsonMatch = raw.match(/\{[\s\S]*\}/);
 
       if (!jsonMatch) {
@@ -110,11 +158,12 @@ FORMAT:
         return null;
       }
 
-      if (!healedStep?.locatorType) {
-        console.log('⚠️ Invalid locator structure');
+      if (!isValidHealedStep(healedStep)) {
+        console.log('⚠️ Invalid healed locator structure:', healedStep);
         return null;
       }
 
+      console.log('✅ AI healed locator candidate:', healedStep);
       return healedStep;
     } catch (err) {
       console.log('❌ AI healing failed:', err.message);

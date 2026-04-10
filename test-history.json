@@ -1,0 +1,34 @@
+[
+  {
+    "testFile": "tests/login.spec.js",
+    "module": "login",
+    "lastStatus": "failed",
+    "failureCount": 1,
+    "successCount": 1,
+    "lastRun": "2026-04-10T07:11:46.023Z"
+  },
+  {
+    "testFile": "tests/inventory.spec.js",
+    "module": "inventory",
+    "lastStatus": "passed",
+    "failureCount": 0,
+    "successCount": 2,
+    "lastRun": "2026-04-10T07:12:38.475Z"
+  },
+  {
+    "testFile": "tests/cart.spec.js",
+    "module": "cart",
+    "lastStatus": "passed",
+    "failureCount": 0,
+    "successCount": 2,
+    "lastRun": "2026-04-10T07:12:13.122Z"
+  },
+  {
+    "testFile": "tests/checkout.spec.js",
+    "module": "checkout",
+    "lastStatus": "passed",
+    "failureCount": 0,
+    "successCount": 2,
+    "lastRun": "2026-04-10T07:10:56.553Z"
+  }
+]

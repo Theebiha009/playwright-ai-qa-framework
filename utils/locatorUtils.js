@@ -1,7 +1,9 @@
 export function getLocator(page, step) {
   switch (step.locatorType) {
     case 'role':
-      return page.getByRole(step.role, { name: step.name });
+      return step.name
+        ? page.getByRole(step.role, { name: step.name })
+        : page.getByRole(step.role);
 
     case 'label':
       return page.getByLabel(step.label);
