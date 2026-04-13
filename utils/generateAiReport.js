@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { getHealingLogs } from './healingLogger.js';
 import { generateAiSummary } from './aiReportService.js';
-
+import PATHS from '../config/paths.js';
 async function run() {
   const healingLogs = getHealingLogs();
 
@@ -72,9 +72,9 @@ async function run() {
     ];
   }
 
-  fs.writeFileSync('./ai-report.json', JSON.stringify(report, null, 2));
+  fs.writeFileSync(PATHS.reports.aiReport, JSON.stringify(report, null, 2));
 
-  console.log('✅ AI report generated: ai-report.json');
+  console.log('✅ AI report generated: PATHS.reports.aiReport');
   console.log(JSON.stringify(report, null, 2));
 }
 

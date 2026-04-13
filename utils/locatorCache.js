@@ -1,20 +1,19 @@
 import fs from 'fs';
-
-const CACHE_FILE = './locator-cache.json';
+import PATHS from '../config/paths.js';
 
 function ensureCacheFile() {
-  if (!fs.existsSync(CACHE_FILE)) {
-    fs.writeFileSync(CACHE_FILE, JSON.stringify({}, null, 2));
+  if (!fs.existsSync(PATHS.storage.locatorCache)) {
+    fs.writeFileSync(PATHS.storage.locatorCache, JSON.stringify({}, null, 2));
   }
 }
 
 function loadCache() {
   ensureCacheFile();
-  return JSON.parse(fs.readFileSync(CACHE_FILE));
+  return JSON.parse(fs.readFileSync(PATHS.storage.locatorCache));
 }
 
 function saveCache(cache) {
-  fs.writeFileSync(CACHE_FILE, JSON.stringify(cache, null, 2));
+  fs.writeFileSync(PATHS.storage.locatorCache, JSON.stringify(cache, null, 2));
 }
 
 export function getCachedLocator(key) {

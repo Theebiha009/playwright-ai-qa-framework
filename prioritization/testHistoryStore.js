@@ -1,20 +1,19 @@
 import fs from 'fs';
-
-const HISTORY_FILE = './test-history.json';
+import PATHS from '../config/paths.js';
 
 function ensureHistoryFile() {
-  if (!fs.existsSync(HISTORY_FILE)) {
-    fs.writeFileSync(HISTORY_FILE, JSON.stringify([], null, 2));
+  if (!fs.existsSync(PATHS.reports.testHistory)) {
+    fs.writeFileSync(PATHS.reports.testHistory, JSON.stringify([], null, 2));
   }
 }
 
 export function loadTestHistory() {
   ensureHistoryFile();
-  return JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf-8'));
+  return JSON.parse(fs.readFileSync(PATHS.reports.testHistory, 'utf-8'));
 }
 
 export function saveTestHistory(history) {
-  fs.writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2));
+  fs.writeFileSync(PATHS.reports.testHistory, JSON.stringify(history, null, 2));
 }
 
 export function upsertTestHistoryRecord(record) {

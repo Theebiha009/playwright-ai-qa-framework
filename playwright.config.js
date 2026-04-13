@@ -6,8 +6,9 @@ export default defineConfig({
   retries: 1,
   workers: 1,
   reporter: [
-    ['html', { outputFolder: 'playwright-report', open: 'never' }]
+    ['html', { outputFolder: 'reports/playwright/html-report', open: 'never' }]
   ],
+  outputDir: "reports/playwright/test-results",
   use: {
     headless: true,
     screenshot: 'only-on-failure',

@@ -1,20 +1,19 @@
 import fs from 'fs';
-
-const HEALING_LOG_FILE = './healing-events.json';
+import PATHS from '../config/paths.js';
 
 function ensureHealingLogFile() {
-  if (!fs.existsSync(HEALING_LOG_FILE)) {
-    fs.writeFileSync(HEALING_LOG_FILE, JSON.stringify([], null, 2));
+  if (!fs.existsSync(PATHS.reports.healingEvents)) {
+    fs.writeFileSync(PATHS.reports.healingEvents, JSON.stringify([], null, 2));
   }
 }
 
 function loadHealingLogs() {
   ensureHealingLogFile();
-  return JSON.parse(fs.readFileSync(HEALING_LOG_FILE, 'utf-8'));
+  return JSON.parse(fs.readFileSync(PATHS.reports.healingEvents, 'utf-8'));
 }
 
 function saveHealingLogs(logs) {
-  fs.writeFileSync(HEALING_LOG_FILE, JSON.stringify(logs, null, 2));
+  fs.writeFileSync(PATHS.reports.healingEvents, JSON.stringify(logs, null, 2));
 }
 
 export function clearHealingLogs() {

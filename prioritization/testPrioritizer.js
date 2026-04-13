@@ -1,7 +1,6 @@
 import fs from 'fs';
 import { loadTestHistory } from './testHistoryStore.js';
-
-const PRIORITY_REPORT_FILE = './test-priority-report.json';
+import PATHS from '../config/paths.js';
 
 const MODULE_CRITICALITY = {
   login: 25,
@@ -58,7 +57,7 @@ export function getPrioritizedTests() {
     }))
     .sort((a, b) => b.priorityScore - a.priorityScore);
 
-  fs.writeFileSync(PRIORITY_REPORT_FILE, JSON.stringify(prioritized, null, 2));
+  fs.writeFileSync(PATHS.reports.testPriorityReport, JSON.stringify(prioritized, null, 2));
 
   return prioritized;
 }
