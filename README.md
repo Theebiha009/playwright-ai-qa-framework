@@ -1,177 +1,191 @@
-# 🚀 Playwright AI QA Automation Framework
+# 🚀 Playwright AI QA Framework
 
-An advanced **AI-powered test automation framework** built using **Playwright (JavaScript)**, designed to simulate real-world QA challenges and solutions.
-
-This framework goes beyond traditional automation by introducing:
-
-* 🤖 AI-based locator healing
-* 🧠 RAG (Retrieval-Augmented Generation) memory
-* ⚡ Smart locator caching
-* 📊 AI-assisted reporting
-* 🧪 AI test generation (with human validation)
-* 🎯 AI-driven test prioritization (execution intelligence)
+### Self-Healing | RAG Memory | AI Automation | Test Prioritization
 
 ---
 
-# 📌 Key Features
+# 📌 Overview
 
-## 1. 🤖 AI Locator Healing
+This project is an **AI-powered Playwright automation framework** designed to:
 
-Automatically fixes broken locators using AI when tests fail.
-
-**Flow:**
-
-```
-Original locator → Cache → RAG → AI → Fallback
-```
-
-Prevents test failures due to UI changes.
+* Reduce test flakiness
+* Automatically heal broken locators
+* Learn from past failures using **RAG (Retrieval-Augmented Generation)**
+* Optimize CI execution using **test prioritization**
 
 ---
 
-## 2. ⚡ Locator Cache
+# 🧠 Core Features
 
-Stores previously healed locators for faster reuse.
+## 🔁 1. Self-Healing Locator Engine
 
+When a locator fails, the framework recovers using a layered approach:
+
+```
+Original Locator
+   ↓
+Cache (fast reuse)
+   ↓
+RAG Memory (similar past fixes)
+   ↓
+AI Healing (LLM-based)
+   ↓
+Strategy Fallback (config-driven)
+   ↓
+Generic Fallback
+```
+
+---
+
+## 🧠 2. RAG-Based Memory System
+
+* Stores successful locator fixes with embeddings
+* Retrieves similar past fixes
 * Reduces repeated AI calls
-* Improves execution speed
+* Improves performance over time
 
 ---
 
-## 3. 🧠 RAG Memory System
+## ⚡ 3. Locator Cache
 
-Stores past healing decisions with embeddings.
-
-* Finds similar failures
-* Reuses correct locators intelligently
-* Avoids repeated AI mistakes
+* Stores exact working locators
+* Enables instant reuse
+* Reduces dependency on AI
 
 ---
 
-## 4. 🧪 AI Test Generator
+## 🧩 4. Metadata-Driven Generic Design
 
-Generates Playwright test scripts from requirements.
+Framework is **fully generic** — no hardcoded login/password logic.
 
-⚠️ Designed for:
-
-* accelerating test creation
-* not replacing human review
-
----
-
-## 5. 📊 AI Healing Reports
-
-Logs all healing activity:
-
-* which locators failed
-* how they were healed
-* which strategy worked (cache / RAG / AI / fallback)
-
----
-
-## 6. 🎯 AI Test Prioritization (NEW 🔥)
-
-Optimizes test execution order based on:
-
-* failure history
-* recency of failures
-* success trends
-* business/module criticality
-
-### 💡 Why this matters
-
-Instead of running all tests blindly:
-
-> Run the most risky tests first → faster feedback → better CI efficiency
-
----
-
-# 🧠 Test Prioritization Logic
-
-Each test gets a **priority score** based on:
-
-| Factor             | Impact              |
-| ------------------ | ------------------- |
-| Failure count      | High                |
-| Recent failures    | Very High           |
-| Success count      | Slight reduction    |
-| Module criticality | Business importance |
-
----
-
-## 🏷️ Module Criticality
+Each action passes structured metadata:
 
 ```js
-login: 25
-checkout: 30
-cart: 15
-inventory: 10
-generated: 5
+await this.safeClick(
+  this.loginBtn,
+  { name: 'loginButton', semantic: 'button' },
+  testName
+);
 ```
 
 ---
 
-## 📊 Example Priority Output
+## 🧠 5. Strategy-Based Fallback (Config Driven)
 
-```json
-[
-  {
-    "testFile": "tests/checkout.spec.js",
-    "module": "checkout",
-    "priorityScore": 59
-  },
-  {
-    "testFile": "tests/login.spec.js",
-    "module": "login",
-    "priorityScore": 53
-  }
-]
+App-specific logic is externalized in:
+
+`utils/elementStrategies.js`
+
+```js
+loginButton: {
+  fallback: [
+    { locatorType: 'role', role: 'button', name: 'Login' }
+  ]
+}
 ```
 
 ---
 
-# 📁 Project Structure
+## 📊 6. AI Reporting
+
+Framework logs:
+
+* Failed locators
+* Healing strategy used (cache / RAG / AI / fallback)
+* Success / failure status
+* Recommendations
+
+---
+
+## ⚡ 7. Test Prioritization (CI Optimization)
+
+Tests are ranked using:
+
+* Failure history
+* Recency
+* Criticality
+
+👉 High-risk tests run first in CI pipelines
+
+---
+
+# 🏗️ Project Structure
 
 ```
-playwright-ai-qa-framework/
-│
-├── pages/                  # Page Object Models
-├── tests/                  # Test specs
-├── utils/                  # AI, logging, caching utilities
-├── rag/                    # RAG memory system
-├── prioritization/         # Test prioritization engine
-│   ├── testHistoryStore.js
-│   ├── testPrioritizer.js
-│   └── runPrioritizedTests.js
-│
-├── test-history.json       # Stores execution history
-├── test-priority-report.json
-├── locator-cache.json
-├── rag-memory.json
-│
-├── playwright.config.js
-├── package.json
-└── README.md
+tests/
+pages/
+  ├── basePage.js
+  ├── loginPage.js
+  ├── inventoryPage.js
+  ├── cartPage.js
+  ├── checkoutPage.js
+
+utils/
+  ├── aiLocatorService.js
+  ├── locatorUtils.js
+  ├── locatorCache.js
+  ├── elementStrategies.js
+  ├── healingLogger.js
+
+rag/
+  ├── ragStore.js
+  ├── ragSearch.js
+  ├── embeddingService.js
+
+reports/
+locator-cache.json
+rag-memory.json
 ```
 
 ---
 
-# ⚙️ Setup
+# 🔄 Execution Flow
+
+```
+Test → Page Object → BasePage
+
+BasePage handles:
+  1. Original locator
+  2. Cache lookup
+  3. RAG similarity search
+  4. AI healing
+  5. Strategy fallback
+  6. Generic fallback
+```
+
+---
+
+# 🧪 Example Test Flow
+
+```
+Login → Inventory → Cart → Checkout
+```
+
+Each step uses:
+
+* safeClick()
+* safeFill()
+
+with metadata-driven healing.
+
+---
+
+# ▶️ How to Run
 
 ## 1. Install dependencies
 
 ```bash
 npm install
+npx playwright install
 ```
 
 ---
 
-## 2. Add OpenAI API Key
+## 2. Reset learned memory (IMPORTANT)
 
-Create `.env`:
-
-```
-OPENAI_API_KEY=your_api_key_here
+```bash
+echo {} > locator-cache.json
+echo [] > rag-memory.json
 ```
 
 ---
@@ -184,121 +198,65 @@ npx playwright test
 
 ---
 
-# 🎯 Run AI Prioritized Tests
+## 4. Debug mode
 
 ```bash
-npm run prioritize:tests
+npx playwright test --headed
 ```
 
 ---
 
-# 📊 View Priority Report
+# ⚠️ Important Notes
 
-```bash
-npm run report:priority
-```
-
----
-
-# 🔄 How It Works (Execution Intelligence)
-
-```
-Run tests
-   ↓
-Store results (test-history.json)
-   ↓
-Score tests based on:
-   - failures
-   - recency
-   - criticality
-   ↓
-Sort tests by risk
-   ↓
-Run highest priority tests first
-```
+* Framework heals **actions only** (click, fill, select)
+* Assertions (`expect`) are NOT auto-healed
+* AI outputs are validated before use
+* Weak/generic locators are NOT stored in RAG
 
 ---
 
-# 🧠 AI Architecture
+# 💡 Design Decisions
 
-## Runtime Intelligence
+### Why not rely only on AI?
 
-* Locator healing (AI + RAG + cache)
+AI is non-deterministic → used as last resort
 
-## Memory Intelligence
+### Why cache before AI?
 
-* RAG system storing past healing decisions
+Fast + reliable reuse
 
-## Execution Intelligence
+### Why RAG?
 
-* Test prioritization based on history
+Handles similar failures, not just exact matches
 
----
+### How bad locators are prevented?
 
-# 🧪 Example Use Case
-
-If:
-
-* Checkout tests fail recently
-* Login fails occasionally
-* Inventory always passes
-
-Then execution becomes:
-
-```
-1. checkout.spec.js
-2. login.spec.js
-3. cart.spec.js
-4. inventory.spec.js
-```
+Only successful locators are stored
 
 ---
 
-# ⚠️ Important Design Principles
+# 🚧 Known Limitations
 
-* AI suggestions are **validated before use**
-* Cache and RAG store only **useful locators**
-* Framework avoids **over-reliance on AI**
-* Designed for **real-world maintainability**
-
----
-
-# 🧠 What This Demonstrates
-
-This framework shows:
-
-* Practical use of AI in QA automation
-* Intelligent failure recovery
-* Test execution optimization
-* Real-world automation architecture
+* Cannot heal assertions
+* AI may generate incorrect locators
+* Generic fallback may click wrong element in complex UI
 
 ---
 
-# 📌 Future Enhancements
+# 🔮 Future Improvements
 
-* AI explanation for prioritization decisions
-* Change-impact based prioritization (Git diff)
-* Flaky test detection
-* TypeScript migration
-* API + UI integrated testing
-
+* AI explanation layer for prioritization
+* Change-impact based test selection
+* Context-aware fallback strategies
 
 ---
 
-# 👩‍💻 Author
+# 🎯 Goal
+
+To build a **self-learning automation framework** that becomes more stable and efficient over time.
+
+---
+
+Author:
 Theebiha Jeyashankar
-Built as part of an **AI SDET upskilling journey** focused on real-world automation challenges.
 
----
-
-# ⭐ Final Note
-
-This is not a “demo AI project”.
-
-It is a **practical framework** that reflects how AI can be applied meaningfully in QA:
-
-* reduce maintenance
-* improve reliability
-* optimize execution
-
----

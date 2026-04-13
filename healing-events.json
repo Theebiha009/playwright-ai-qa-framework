@@ -2157,5 +2157,1247 @@
       "role": "button",
       "name": "Login"
     }
+  },
+  {
+    "timestamp": "2026-04-11T09:09:54.483Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "ai",
+    "status": "success",
+    "details": "AI healed and cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:10:01.125Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "ai",
+    "status": "success",
+    "details": "AI healed and cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:10:08.754Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "ai",
+    "status": "success",
+    "details": "AI healed and cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:10:22.192Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:10:27.228Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:10:32.338Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:10:45.747Z",
+    "testName": "invalid login",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:10:50.777Z",
+    "testName": "invalid login",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:10:55.875Z",
+    "testName": "invalid login",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:15:11.641Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:15:16.685Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:15:21.940Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:15:28.679Z",
+    "testName": "invalid login",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:15:33.706Z",
+    "testName": "invalid login",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:15:38.779Z",
+    "testName": "invalid login",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:21:44.629Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:21:49.668Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:21:54.904Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:22:03.082Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:22:08.121Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:22:13.263Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:22:22.103Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:22:27.137Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:22:32.253Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:35:39.225Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:35:44.257Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:35:49.574Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:35:57.981Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:36:03.021Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:36:08.139Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:36:16.627Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:36:21.652Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:36:26.746Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:44:52.690Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:44:57.738Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:45:03.065Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:45:10.527Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:45:15.560Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:45:20.830Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:49:48.142Z",
+    "testName": "user can navigate to cart",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:49:53.176Z",
+    "testName": "user can navigate to cart",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:49:58.420Z",
+    "testName": "user can navigate to cart",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:50:05.434Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:50:10.457Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:50:15.528Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:50:23.767Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:50:28.809Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T09:50:33.929Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T22:41:22.682Z",
+    "testName": "user can navigate to cart",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T22:41:27.714Z",
+    "testName": "user can navigate to cart",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T22:41:32.825Z",
+    "testName": "user can navigate to cart",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T22:41:38.790Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T22:41:43.812Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T22:41:48.898Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T22:41:56.492Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T22:42:01.533Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-11T22:42:06.703Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:42:56.433Z",
+    "testName": "user can navigate to cart",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:43:01.523Z",
+    "testName": "user can navigate to cart",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:43:06.998Z",
+    "testName": "user can navigate to cart",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:43:14.419Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:43:19.450Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:43:24.541Z",
+    "testName": "user can remove item from cart",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:44:03.457Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:44:08.487Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:44:13.776Z",
+    "testName": "user can complete checkout successfully",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:44:20.880Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:44:25.896Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:44:30.986Z",
+    "testName": "user can continue checkout after entering information",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:45:13.155Z",
+    "testName": "inventory page loads after valid login",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:45:18.192Z",
+    "testName": "inventory page loads after valid login",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:45:23.300Z",
+    "testName": "inventory page loads after valid login",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:45:30.018Z",
+    "testName": "user can add first item to cart from inventory",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:45:35.034Z",
+    "testName": "user can add first item to cart from inventory",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:45:40.120Z",
+    "testName": "user can add first item to cart from inventory",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:46:16.932Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:46:21.956Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:46:27.057Z",
+    "testName": "valid login",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:46:33.797Z",
+    "testName": "invalid login",
+    "page": "LoginPage",
+    "element": "username",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Username123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_username_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Username"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:46:38.813Z",
+    "testName": "invalid login",
+    "page": "LoginPage",
+    "element": "password",
+    "action": "fill",
+    "originalLocator": "getByPlaceholder('Password123')",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached fill locator for LoginPage_password_fill",
+    "healedLocator": {
+      "locatorType": "placeholder",
+      "placeholder": "Password"
+    }
+  },
+  {
+    "timestamp": "2026-04-12T03:46:43.874Z",
+    "testName": "invalid login",
+    "page": "LoginPage",
+    "element": "loginButton",
+    "action": "click",
+    "originalLocator": "getByRole('button', { name: 'Login123' })",
+    "strategy": "cache",
+    "status": "success",
+    "details": "Used cached click locator for LoginPage_loginButton_click",
+    "healedLocator": {
+      "locatorType": "role",
+      "role": "button",
+      "name": "Login"
+    }
   }
 ]

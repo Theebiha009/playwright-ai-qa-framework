@@ -1,4 +1,8 @@
 {
+  "LoginPage_username_fill": {
+    "locatorType": "placeholder",
+    "placeholder": "Username"
+  },
   "LoginPage_password_fill": {
     "locatorType": "placeholder",
     "placeholder": "Password"
@@ -7,9 +11,5 @@
     "locatorType": "role",
     "role": "button",
     "name": "Login"
-  },
-  "CheckoutPage_firstName_fill": {
-    "locatorType": "placeholder",
-    "placeholder": "First Name"
   }
 }

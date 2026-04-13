@@ -10,7 +10,7 @@ test('valid login', async ({ page }) => {
   await loginPage.login('standard_user', 'secret_sauce', testName);
 
   await expect(page).toHaveURL(/inventory/);
-  await expect(page.locator('.inventory_list1')).toBeVisible();
+  await expect(page.locator('.inventory_list')).toBeVisible();
 
   console.log('Success for valid login');
 });

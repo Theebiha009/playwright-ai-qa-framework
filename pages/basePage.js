@@ -5,6 +5,7 @@ import { logHealingEvent } from '../utils/healingLogger.js';
 import { addRagEntry } from '../rag/ragStore.js';
 import { findSimilarHealing } from '../rag/ragSearch.js';
 import { getEmbedding } from '../rag/embeddingService.js';
+import { ELEMENT_STRATEGIES } from '../utils/elementStrategies.js';
 
 export default class BasePage {
   constructor(page) {
@@ -12,102 +13,80 @@ export default class BasePage {
     this.pageName = this.constructor.name;
   }
 
-  getKey(elementName, actionType) {
-    return buildLocatorKey(this.pageName, elementName, actionType);
+  getKey(meta, actionType) {
+    return buildLocatorKey(this.pageName, meta.name, actionType);
   }
 
-  buildRagContext(elementName, actionType, locator) {
-    return `${this.pageName} | ${elementName} | ${actionType} | ${locator.toString()}`;
+  buildRagContext(meta, actionType, locator) {
+    return `${this.pageName} | ${meta.name} | ${meta.semantic || 'unknown'} | ${actionType} | ${locator.toString()}`;
   }
 
-  isLocatorCompatible(step, actionType, elementName) {
+  getElementStrategy(meta) {
+    return ELEMENT_STRATEGIES[meta.name] || { semantic: meta.semantic || 'unknown', fallback: [] };
+  }
+
+  isLocatorCompatible(step, actionType, meta) {
     if (!step) return false;
 
-    const element = (elementName || '').toLowerCase();
+    const semantic = meta.semantic || this.getElementStrategy(meta).semantic;
 
     if (actionType === 'click') {
-      // Prevent non-clickable locator styles for buttons/actions
-      if (element.includes('button') || element.includes('link')) {
+      if (semantic === 'button' || semantic === 'link') {
         return ['role', 'text', 'css'].includes(step.locatorType);
       }
       return ['role', 'text', 'css'].includes(step.locatorType);
     }
 
     if (actionType === 'fill') {
-      // Prevent button/text style locators for inputs
-      if (element.includes('password') || element.includes('username') || element.includes('name')) {
+      if (semantic === 'input' || semantic === 'textbox') {
         return ['placeholder', 'label', 'css', 'role'].includes(step.locatorType);
       }
       return ['placeholder', 'label', 'css', 'role'].includes(step.locatorType);
     }
 
+    if (actionType === 'select') {
+      return ['role', 'label', 'css'].includes(step.locatorType);
+    }
+
     return true;
   }
 
-  normalizeHealedStep(step, elementName, actionType) {
+  normalizeHealedStep(step, meta, actionType) {
     if (!step) return null;
 
-    const element = (elementName || '').toLowerCase();
+    const semantic = meta.semantic || this.getElementStrategy(meta).semantic;
 
     if (
+      actionType === 'click' &&
+      semantic === 'button' &&
       step.locatorType === 'role' &&
-      step.role === 'button' &&
       typeof step.name === 'string'
     ) {
-      const suspicious = step.name.trim().toLowerCase();
-
-      if (suspicious === 'login-button' || suspicious === 'login button') {
-        return { locatorType: 'role', role: 'button', name: 'Login' };
-      }
+      const suspicious = step.name.trim();
 
       if (suspicious.includes('-')) {
-        const normalizedText = step.name
+        const normalizedText = suspicious
           .split('-')
           .map(word => word.charAt(0).toUpperCase() + word.slice(1))
           .join(' ');
-
-        if (normalizedText.toLowerCase().includes('login')) {
-          return { locatorType: 'role', role: 'button', name: 'Login' };
-        }
 
         return { locatorType: 'text', text: normalizedText };
       }
     }
 
-    if (actionType === 'fill' && element.includes('password')) {
-      if (step.locatorType === 'placeholder' && step.placeholder?.toLowerCase() === 'password') {
-        return step;
-      }
-
-      if (step.locatorType === 'css' && step.selector) {
-        return step;
-      }
-
-      if (step.locatorType === 'label' && step.label?.toLowerCase() === 'password') {
-        return { locatorType: 'placeholder', placeholder: 'Password' };
-      }
-
-      return { locatorType: 'css', selector: "input[type='password']" };
-    }
-
-    if (actionType === 'fill' && element.includes('username')) {
-      if (step.locatorType === 'placeholder' && step.placeholder?.toLowerCase() === 'username') {
-        return step;
-      }
-
-      if (step.locatorType === 'label' && /username|user/i.test(step.label || '')) {
-        return { locatorType: 'placeholder', placeholder: 'Username' };
-      }
-    }
-
-    if (actionType === 'fill' && step.locatorType === 'label' && step.selector) {
+    if (
+      actionType === 'fill' &&
+      semantic === 'input' &&
+      step.locatorType === 'label' &&
+      step.selector
+    ) {
       return { locatorType: 'css', selector: step.selector };
     }
 
     return step;
   }
 
-  async saveRagMemory(elementName, actionType, originalLocator, healedStep) {
+  async saveRagMemory(meta, actionType, originalLocator, healedStep) {
     const weakGeneric =
       (healedStep.locatorType === 'css' && healedStep.selector === 'input') ||
       (healedStep.locatorType === 'role' && healedStep.role === 'textbox' && !healedStep.name) ||
@@ -118,14 +97,15 @@ export default class BasePage {
       return;
     }
 
-    const contextText = this.buildRagContext(elementName, actionType, originalLocator);
+    const contextText = this.buildRagContext(meta, actionType, originalLocator);
     const embedding = await getEmbedding(contextText);
 
     if (!embedding) return;
 
     addRagEntry({
       page: this.pageName,
-      element: elementName,
+      element: meta.name,
+      semantic: meta.semantic,
       action: actionType,
       originalLocator: originalLocator.toString(),
       healedLocator: healedStep,
@@ -134,187 +114,79 @@ export default class BasePage {
     });
   }
 
-  async fallbackClick(locator, elementName, testName) {
-    const locatorStr = locator.toString().toLowerCase();
+  async tryStrategyFallback(actionType, value, meta) {
+    const strategy = this.getElementStrategy(meta);
 
-    try {
-      if (locatorStr.includes('button')) {
-        const loginButton = this.page.getByRole('button', { name: /login/i });
-        if (await loginButton.count()) {
-          await loginButton.first().click();
-          logHealingEvent({
-            testName,
-            page: this.pageName,
-            element: elementName,
-            action: 'click',
-            originalLocator: locator.toString(),
-            strategy: 'fallback',
-            status: 'success',
-            details: 'Used login button regex fallback',
-            healedLocator: { locatorType: 'role', role: 'button', name: 'Login' }
-          });
-          return;
-        }
-
-        const buttons = this.page.getByRole('button');
-        if (await buttons.count()) {
-          await buttons.first().click();
-          logHealingEvent({
-            testName,
-            page: this.pageName,
-            element: elementName,
-            action: 'click',
-            originalLocator: locator.toString(),
-            strategy: 'fallback',
-            status: 'success',
-            details: 'Used generic button fallback'
-          });
-          return;
-        }
-      }
-
-      if (locatorStr.includes('link')) {
-        const links = this.page.getByRole('link');
-        if (await links.count()) {
-          await links.first().click();
-          logHealingEvent({
-            testName,
-            page: this.pageName,
-            element: elementName,
-            action: 'click',
-            originalLocator: locator.toString(),
-            strategy: 'fallback',
-            status: 'success',
-            details: 'Used generic link fallback'
-          });
-          return;
-        }
-      }
-
-      const genericClickable = this.page.locator('button, a, [role="button"]');
-      if (await genericClickable.count()) {
-        await genericClickable.first().click();
-        logHealingEvent({
-          testName,
-          page: this.pageName,
-          element: elementName,
-          action: 'click',
-          originalLocator: locator.toString(),
-          strategy: 'fallback',
-          status: 'success',
-          details: 'Used generic clickable fallback'
-        });
-        return;
-      }
-
-      throw new Error('No fallback click locator found');
-    } catch (err) {
-      logHealingEvent({
-        testName,
-        page: this.pageName,
-        element: elementName,
-        action: 'click',
-        originalLocator: locator.toString(),
-        strategy: 'fallback',
-        status: 'failed',
-        details: err.message
-      });
-      throw err;
+    if (!strategy.fallback?.length) {
+      return false;
     }
+
+    for (const fallbackStep of strategy.fallback) {
+      try {
+        const locator = getLocator(this.page, fallbackStep);
+
+        if (actionType === 'click') {
+          if (await locator.count()) {
+            await locator.first().click();
+            return fallbackStep;
+          }
+        }
+
+        if (actionType === 'fill') {
+          if (await locator.count()) {
+            await locator.first().fill(value);
+            return fallbackStep;
+          }
+        }
+
+        if (actionType === 'select') {
+          if (await locator.count()) {
+            await locator.first().selectOption(value);
+            return fallbackStep;
+          }
+        }
+      } catch {
+        // continue trying next fallback
+      }
+    }
+
+    return false;
   }
 
-  async fallbackFill(locator, value, elementName, testName) {
-    const locatorStr = locator.toString().toLowerCase();
-
-    try {
-      if (locatorStr.includes('password')) {
-        const passwordByPlaceholder = this.page.getByPlaceholder(/password/i);
-        if (await passwordByPlaceholder.count()) {
-          await passwordByPlaceholder.first().fill(value);
-          logHealingEvent({
-            testName,
-            page: this.pageName,
-            element: elementName,
-            action: 'fill',
-            originalLocator: locator.toString(),
-            strategy: 'fallback',
-            status: 'success',
-            details: 'Used password placeholder fallback',
-            healedLocator: { locatorType: 'placeholder', placeholder: 'Password' }
-          });
-          return;
-        }
-
-        const passwordCss = this.page.locator("input[type='password']");
-        if (await passwordCss.count()) {
-          await passwordCss.first().fill(value);
-          logHealingEvent({
-            testName,
-            page: this.pageName,
-            element: elementName,
-            action: 'fill',
-            originalLocator: locator.toString(),
-            strategy: 'fallback',
-            status: 'success',
-            details: 'Used password CSS fallback',
-            healedLocator: { locatorType: 'css', selector: "input[type='password']" }
-          });
-          return;
-        }
-      }
-
-      const textboxes = this.page.getByRole('textbox');
-      if (await textboxes.count()) {
-        await textboxes.first().fill(value);
-        logHealingEvent({
-          testName,
-          page: this.pageName,
-          element: elementName,
-          action: 'fill',
-          originalLocator: locator.toString(),
-          strategy: 'fallback',
-          status: 'success',
-          details: 'Used generic textbox fallback',
-          healedLocator: { locatorType: 'role', role: 'textbox' }
-        });
-        return;
-      }
-
-      const inputs = this.page.locator('input');
-      if (await inputs.count()) {
-        await inputs.first().fill(value);
-        logHealingEvent({
-          testName,
-          page: this.pageName,
-          element: elementName,
-          action: 'fill',
-          originalLocator: locator.toString(),
-          strategy: 'fallback',
-          status: 'success',
-          details: 'Used generic input fallback',
-          healedLocator: { locatorType: 'css', selector: 'input' }
-        });
-        return;
-      }
-
-      throw new Error('No fallback fill locator found');
-    } catch (err) {
-      logHealingEvent({
-        testName,
-        page: this.pageName,
-        element: elementName,
-        action: 'fill',
-        originalLocator: locator.toString(),
-        strategy: 'fallback',
-        status: 'failed',
-        details: err.message
-      });
-      throw err;
+  async genericFallbackClick(locator) {
+    const buttons = this.page.getByRole('button');
+    if (await buttons.count()) {
+      await buttons.first().click();
+      return { locatorType: 'role', role: 'button' };
     }
+
+    const clickable = this.page.locator('button, a, [role="button"]');
+    if (await clickable.count()) {
+      await clickable.first().click();
+      return { locatorType: 'css', selector: 'button, a, [role="button"]' };
+    }
+
+    throw new Error(`No generic click fallback found for ${locator.toString()}`);
   }
 
-  async safeClick(originalLocator, elementName, testName = 'unknown test') {
-    const key = this.getKey(elementName, 'click');
+  async genericFallbackFill(locator, value) {
+    const textboxes = this.page.getByRole('textbox');
+    if (await textboxes.count()) {
+      await textboxes.first().fill(value);
+      return { locatorType: 'role', role: 'textbox' };
+    }
+
+    const inputs = this.page.locator('input');
+    if (await inputs.count()) {
+      await inputs.first().fill(value);
+      return { locatorType: 'css', selector: 'input' };
+    }
+
+    throw new Error(`No generic fill fallback found for ${locator.toString()}`);
+  }
+
+  async safeClick(originalLocator, meta, testName = 'unknown test') {
+    const key = this.getKey(meta, 'click');
 
     try {
       await originalLocator.click({ timeout: 5000 });
@@ -333,7 +205,7 @@ export default class BasePage {
         logHealingEvent({
           testName,
           page: this.pageName,
-          element: elementName,
+          element: meta.name,
           action: 'click',
           originalLocator: originalLocator.toString(),
           strategy: 'cache',
@@ -347,7 +219,7 @@ export default class BasePage {
       }
     }
 
-    const ragContext = this.buildRagContext(elementName, 'click', originalLocator);
+    const ragContext = this.buildRagContext(meta, 'click', originalLocator);
     const ragResult = await findSimilarHealing(ragContext);
 
     if (ragResult?.match?.healedLocator) {
@@ -359,7 +231,7 @@ export default class BasePage {
         logHealingEvent({
           testName,
           page: this.pageName,
-          element: elementName,
+          element: meta.name,
           action: 'click',
           originalLocator: originalLocator.toString(),
           strategy: 'rag',
@@ -371,19 +243,19 @@ export default class BasePage {
         setCachedLocator(key, ragResult.match.healedLocator);
         return;
       } catch (err) {
-        console.log('⚠️ RAG locator failed:', err.message);
+        console.log('⚠️ RAG click locator failed:', err.message);
       }
     } else {
       console.log(`🧠 No RAG match found for ${key}`);
     }
 
     console.log('🤖 Trying AI healing for click...');
-    let healedStep = await aiLocatorService.healLocator(originalLocator, this.page, 'click', elementName);
+    let healedStep = await aiLocatorService.healLocator(originalLocator, this.page, 'click', meta.name);
 
     if (healedStep) {
-      healedStep = this.normalizeHealedStep(healedStep, elementName, 'click');
+      healedStep = this.normalizeHealedStep(healedStep, meta, 'click');
 
-      if (!this.isLocatorCompatible(healedStep, 'click', elementName)) {
+      if (!this.isLocatorCompatible(healedStep, 'click', meta)) {
         console.log('⚠️ Rejected incompatible AI click locator:', healedStep);
       } else {
         try {
@@ -393,12 +265,12 @@ export default class BasePage {
           await healedLocator.click({ timeout: 5000 });
 
           setCachedLocator(key, healedStep);
-          await this.saveRagMemory(elementName, 'click', originalLocator, healedStep);
+          await this.saveRagMemory(meta, 'click', originalLocator, healedStep);
 
           logHealingEvent({
             testName,
             page: this.pageName,
-            element: elementName,
+            element: meta.name,
             action: 'click',
             originalLocator: originalLocator.toString(),
             strategy: 'ai',
@@ -416,12 +288,38 @@ export default class BasePage {
       console.log('⚠️ AI healing returned null for click');
     }
 
-    console.log('⚠️ Using generic click fallback...');
-    await this.fallbackClick(originalLocator, elementName, testName);
+    const strategyFallback = await this.tryStrategyFallback('click', null, meta);
+    if (strategyFallback) {
+      logHealingEvent({
+        testName,
+        page: this.pageName,
+        element: meta.name,
+        action: 'click',
+        originalLocator: originalLocator.toString(),
+        strategy: 'fallback',
+        status: 'success',
+        details: 'Used configured fallback strategy',
+        healedLocator: strategyFallback
+      });
+      return;
+    }
+
+    const genericFallback = await this.genericFallbackClick(originalLocator);
+    logHealingEvent({
+      testName,
+      page: this.pageName,
+      element: meta.name,
+      action: 'click',
+      originalLocator: originalLocator.toString(),
+      strategy: 'fallback',
+      status: 'success',
+      details: 'Used generic click fallback',
+      healedLocator: genericFallback
+    });
   }
 
-  async safeFill(originalLocator, value, elementName, testName = 'unknown test') {
-    const key = this.getKey(elementName, 'fill');
+  async safeFill(originalLocator, value, meta, testName = 'unknown test') {
+    const key = this.getKey(meta, 'fill');
 
     try {
       await originalLocator.fill(value, { timeout: 5000 });
@@ -440,7 +338,7 @@ export default class BasePage {
         logHealingEvent({
           testName,
           page: this.pageName,
-          element: elementName,
+          element: meta.name,
           action: 'fill',
           originalLocator: originalLocator.toString(),
           strategy: 'cache',
@@ -454,7 +352,7 @@ export default class BasePage {
       }
     }
 
-    const ragContext = this.buildRagContext(elementName, 'fill', originalLocator);
+    const ragContext = this.buildRagContext(meta, 'fill', originalLocator);
     const ragResult = await findSimilarHealing(ragContext);
 
     if (ragResult?.match?.healedLocator) {
@@ -466,7 +364,7 @@ export default class BasePage {
         logHealingEvent({
           testName,
           page: this.pageName,
-          element: elementName,
+          element: meta.name,
           action: 'fill',
           originalLocator: originalLocator.toString(),
           strategy: 'rag',
@@ -485,12 +383,12 @@ export default class BasePage {
     }
 
     console.log('🤖 Trying AI healing for fill...');
-    let healedStep = await aiLocatorService.healLocator(originalLocator, this.page, 'fill', elementName);
+    let healedStep = await aiLocatorService.healLocator(originalLocator, this.page, 'fill', meta.name);
 
     if (healedStep) {
-      healedStep = this.normalizeHealedStep(healedStep, elementName, 'fill');
+      healedStep = this.normalizeHealedStep(healedStep, meta, 'fill');
 
-      if (!this.isLocatorCompatible(healedStep, 'fill', elementName)) {
+      if (!this.isLocatorCompatible(healedStep, 'fill', meta)) {
         console.log('⚠️ Rejected incompatible AI fill locator:', healedStep);
       } else {
         try {
@@ -500,12 +398,12 @@ export default class BasePage {
           await healedLocator.fill(value, { timeout: 5000 });
 
           setCachedLocator(key, healedStep);
-          await this.saveRagMemory(elementName, 'fill', originalLocator, healedStep);
+          await this.saveRagMemory(meta, 'fill', originalLocator, healedStep);
 
           logHealingEvent({
             testName,
             page: this.pageName,
-            element: elementName,
+            element: meta.name,
             action: 'fill',
             originalLocator: originalLocator.toString(),
             strategy: 'ai',
@@ -523,7 +421,155 @@ export default class BasePage {
       console.log('⚠️ AI healing returned null for fill');
     }
 
-    console.log('⚠️ Using generic fill fallback...');
-    await this.fallbackFill(originalLocator, value, elementName, testName);
+    const strategyFallback = await this.tryStrategyFallback('fill', value, meta);
+    if (strategyFallback) {
+      logHealingEvent({
+        testName,
+        page: this.pageName,
+        element: meta.name,
+        action: 'fill',
+        originalLocator: originalLocator.toString(),
+        strategy: 'fallback',
+        status: 'success',
+        details: 'Used configured fallback strategy',
+        healedLocator: strategyFallback
+      });
+      return;
+    }
+
+    const genericFallback = await this.genericFallbackFill(originalLocator, value);
+    logHealingEvent({
+      testName,
+      page: this.pageName,
+      element: meta.name,
+      action: 'fill',
+      originalLocator: originalLocator.toString(),
+      strategy: 'fallback',
+      status: 'success',
+      details: 'Used generic fill fallback',
+      healedLocator: genericFallback
+    });
+  }
+
+  async safeSelectOption(originalLocator, value, meta, testName = 'unknown test') {
+    const key = this.getKey(meta, 'select');
+
+    try {
+      await originalLocator.selectOption(value, { timeout: 5000 });
+      return;
+    } catch (err) {
+      console.log('❌ Original select locator failed:', err.message);
+    }
+
+    const cached = getCachedLocator(key);
+    if (cached) {
+      console.log(`⚡ Using cached select locator for ${key}`);
+      try {
+        const cachedLocator = getLocator(this.page, cached);
+        await cachedLocator.selectOption(value, { timeout: 5000 });
+
+        logHealingEvent({
+          testName,
+          page: this.pageName,
+          element: meta.name,
+          action: 'select',
+          originalLocator: originalLocator.toString(),
+          strategy: 'cache',
+          status: 'success',
+          details: `Used cached select locator for ${key}`,
+          healedLocator: cached
+        });
+        return;
+      } catch (err) {
+        console.log('⚠️ Cached select locator failed:', err.message);
+      }
+    }
+
+    const ragContext = this.buildRagContext(meta, 'select', originalLocator);
+    const ragResult = await findSimilarHealing(ragContext);
+
+    if (ragResult?.match?.healedLocator) {
+      console.log(`🧠 RAG match found with score ${ragResult.score.toFixed(4)}`);
+      try {
+        const ragLocator = getLocator(this.page, ragResult.match.healedLocator);
+        await ragLocator.selectOption(value, { timeout: 5000 });
+
+        logHealingEvent({
+          testName,
+          page: this.pageName,
+          element: meta.name,
+          action: 'select',
+          originalLocator: originalLocator.toString(),
+          strategy: 'rag',
+          status: 'success',
+          details: `Used RAG memory with score ${ragResult.score.toFixed(4)}`,
+          healedLocator: ragResult.match.healedLocator
+        });
+
+        setCachedLocator(key, ragResult.match.healedLocator);
+        return;
+      } catch (err) {
+        console.log('⚠️ RAG select locator failed:', err.message);
+      }
+    } else {
+      console.log(`🧠 No RAG match found for ${key}`);
+    }
+
+    console.log('🤖 Trying AI healing for select...');
+    let healedStep = await aiLocatorService.healLocator(originalLocator, this.page, 'select', meta.name);
+
+    if (healedStep) {
+      healedStep = this.normalizeHealedStep(healedStep, meta, 'select');
+
+      if (!this.isLocatorCompatible(healedStep, 'select', meta)) {
+        console.log('⚠️ Rejected incompatible AI select locator:', healedStep);
+      } else {
+        try {
+          console.log('🧪 Building Playwright locator from AI step:', healedStep);
+          const healedLocator = getLocator(this.page, healedStep);
+
+          await healedLocator.selectOption(value, { timeout: 5000 });
+
+          setCachedLocator(key, healedStep);
+          await this.saveRagMemory(meta, 'select', originalLocator, healedStep);
+
+          logHealingEvent({
+            testName,
+            page: this.pageName,
+            element: meta.name,
+            action: 'select',
+            originalLocator: originalLocator.toString(),
+            strategy: 'ai',
+            status: 'success',
+            details: `AI healed and cached select locator for ${key}`,
+            healedLocator: healedStep
+          });
+          return;
+        } catch (err) {
+          console.log('⚠️ AI select locator failed:', err.message);
+          console.log('⚠️ AI healed step was:', healedStep);
+        }
+      }
+    } else {
+      console.log('⚠️ AI healing returned null for select');
+    }
+
+    const strategyFallback = await this.tryStrategyFallback('select', value, meta);
+    if (strategyFallback) {
+      logHealingEvent({
+        testName,
+        page: this.pageName,
+        element: meta.name,
+        action: 'select',
+        originalLocator: originalLocator.toString(),
+        strategy: 'fallback',
+        status: 'success',
+        details: 'Used configured fallback strategy',
+        healedLocator: strategyFallback
+      });
+      return;
+    }
+
+    throw new Error(`Select action failed for ${meta.name}`);
   }
 }

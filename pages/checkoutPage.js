@@ -4,40 +4,62 @@ export default class CheckoutPage extends BasePage {
   constructor(page) {
     super(page);
 
-    this.firstName = page.getByPlaceholder('First Name1');//intentionally wrong password
+    this.firstName = page.getByPlaceholder('First Name');
     this.lastName = page.getByPlaceholder('Last Name');
     this.postalCode = page.getByPlaceholder('Zip/Postal Code');
+
     this.continueBtn = page.getByRole('button', { name: /^continue$/i });
     this.finishBtn = page.getByRole('button', { name: /^finish$/i });
-    this.cancelBtn = page.getByRole('button', { name: /^cancel$/i });
-    this.completeHeader = page.locator('.complete-header');
+
+    this.completeMsg = page.locator('.complete-header');
   }
 
-  async enterCheckoutInformation(firstName, lastName, postalCode, testName) {
-    await this.safeFill(this.firstName, firstName, 'firstName', testName);
-    await this.safeFill(this.lastName, lastName, 'lastName', testName);
-    await this.safeFill(this.postalCode, postalCode, 'postalCode', testName);
+  async enterCheckoutInformation(first, last, zip, testName) {
+    await this.safeFill(
+      this.firstName,
+      first,
+      { name: 'firstName', semantic: 'input' },
+      testName
+    );
+
+    await this.safeFill(
+      this.lastName,
+      last,
+      { name: 'lastName', semantic: 'input' },
+      testName
+    );
+
+    await this.safeFill(
+      this.postalCode,
+      zip,
+      { name: 'postalCode', semantic: 'input' },
+      testName
+    );
   }
 
   async continueCheckout(testName) {
-    await this.safeClick(this.continueBtn, 'continueBtn', testName);
+    await this.safeClick(
+      this.continueBtn,
+      { name: 'continueBtn', semantic: 'button' },
+      testName
+    );
   }
 
   async finishCheckout(testName) {
-    await this.safeClick(this.finishBtn, 'finishBtn', testName);
+    await this.safeClick(
+      this.finishBtn,
+      { name: 'finishBtn', semantic: 'button' },
+      testName
+    );
   }
 
-  async cancelCheckout(testName) {
-    await this.safeClick(this.cancelBtn, 'cancelBtn', testName);
-  }
-
-  async completeCheckout(firstName, lastName, postalCode, testName) {
-    await this.enterCheckoutInformation(firstName, lastName, postalCode, testName);
+  async completeCheckout(first, last, zip, testName) {
+    await this.enterCheckoutInformation(first, last, zip, testName);
     await this.continueCheckout(testName);
     await this.finishCheckout(testName);
   }
 
   async verifyOrderComplete() {
-    await this.completeHeader.waitFor({ timeout: 5000 });
+    await this.completeMsg.waitFor({ state: 'visible' });
   }
 }
