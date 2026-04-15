@@ -1,20 +1,19 @@
 import fs from 'fs';
-
-const RAG_STORE_FILE = './rag-memory.json';
+import PATHS from '../config/paths.js';
 
 function ensureRagStoreFile() {
-  if (!fs.existsSync(RAG_STORE_FILE)) {
-    fs.writeFileSync(RAG_STORE_FILE, JSON.stringify([], null, 2));
+  if (!fs.existsSync(PATHS.storage.ragMemory)) {
+    fs.writeFileSync(PATHS.storage.ragMemory, JSON.stringify([], null, 2));
   }
 }
 
 export function loadRagMemory() {
   ensureRagStoreFile();
-  return JSON.parse(fs.readFileSync(RAG_STORE_FILE, 'utf-8'));
+  return JSON.parse(fs.readFileSync(PATHS.storage.ragMemory, 'utf-8'));
 }
 
 export function saveRagMemory(memory) {
-  fs.writeFileSync(RAG_STORE_FILE, JSON.stringify(memory, null, 2));
+  fs.writeFileSync(PATHS.storage.ragMemory, JSON.stringify(memory, null, 2));
 }
 
 export function addRagEntry(entry) {
